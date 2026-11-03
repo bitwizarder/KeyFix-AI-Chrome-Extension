@@ -75,12 +75,12 @@ textarea {
   margin-inline-start: auto;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0px;
   border: 1px solid #294a46;
   background: #102c2b;
   color: #72e4bd;
   border-radius: 30px;
-  padding: 5px 9px;
+  padding: 5px;
   font-size: 10px;
 }
 .language-toggle {
