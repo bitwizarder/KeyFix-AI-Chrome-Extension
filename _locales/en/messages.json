@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "KeyFix AI — Keyboard Layout Fixer"
+  },
+  "extensionDescription": {
+    "message": "Detects and locally corrects Persian and English text typed with the wrong keyboard layout."
+  },
+  "convertSelectionCommand": {
+    "message": "Convert selected text or the phrase near the caret"
+  }
+}

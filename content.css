@@ -43,6 +43,9 @@
   max-width: min(365px, calc(100vw - 20px));
   animation: keyfix-in 0.16s ease-out;
 }
+#keyfix-suggestion[lang="en"] {
+  font-family: Arial, Helvetica, sans-serif;
+}
 #keyfix-suggestion * {
   box-sizing: border-box;
 }
@@ -70,6 +73,9 @@
 #keyfix-suggestion .kf-preview {
   color: #aef4de;
   font-size: 11px;
+  direction: auto;
+  unicode-bidi: plaintext;
+  text-align: start;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -96,6 +102,9 @@
   color: #aeb9d7;
   background: transparent;
   font-size: 16px;
+}
+#keyfix-suggestion[lang="en"] button {
+  font-family: Arial, Helvetica, sans-serif;
 }
 @keyframes keyfix-in {
   from {

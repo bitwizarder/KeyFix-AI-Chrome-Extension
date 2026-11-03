@@ -4,16 +4,20 @@
 
   const keyboard = globalThis.KeyFixKeyboard;
   if (!keyboard) throw new Error('KeyFix keyboard mapping did not load.');
+  const locale = globalThis.KeyFixLocale;
+  if (!locale) throw new Error('KeyFix language translations did not load.');
 
   let enabled = true;
   let smartMode = true;
+  let language = locale.getDefaultLanguage();
   let timer = null;
   let bubble = null;
   let dismissedSignature = '';
 
-  chrome.storage.sync.get({ suggestions: true, smartMode: true }, data => {
+  chrome.storage.sync.get({ suggestions: true, smartMode: true, language: null }, data => {
     enabled = data.suggestions;
     smartMode = data.smartMode;
+    language = locale.resolveLanguage(data.language);
   });
   chrome.storage.onChanged.addListener((changes, area) => {
     if (area !== 'sync') return;
@@ -22,6 +26,10 @@
       if (!enabled) hide();
     }
     if (changes.smartMode) smartMode = changes.smartMode.newValue;
+    if (changes.language) {
+      language = locale.resolveLanguage(changes.language.newValue);
+      hide();
+    }
   });
 
   const controlSelector = 'textarea,input:not([type]),input[type=text],input[type=search],input[type=email],input[type=url],input[type=tel]';
@@ -139,12 +147,15 @@
     bubble.setAttribute('role', 'status');
     const icon = document.createElement('span'); icon.className = 'kf-icon'; icon.textContent = '✦';
     const copy = document.createElement('span'); copy.className = 'kf-copy';
-    const title = document.createElement('span'); title.className = 'kf-title'; title.textContent = 'شاید زبان کیبورد اشتباهه';
+    const strings = locale.messages[language];
+    bubble.lang = language;
+    bubble.dir = language === 'fa' ? 'rtl' : 'ltr';
+    const title = document.createElement('span'); title.className = 'kf-title'; title.textContent = strings.suggestionTitle;
     const preview = document.createElement('span'); preview.className = 'kf-preview'; preview.textContent = candidate.replacement;
     copy.append(title, preview);
     const apply = document.createElement('button'); apply.className = 'kf-apply'; apply.type = 'button';
-    apply.textContent = candidate.wordCount > 1 ? 'اصلاح عبارت' : 'اصلاح';
-    const dismiss = document.createElement('button'); dismiss.className = 'kf-dismiss'; dismiss.type = 'button'; dismiss.setAttribute('aria-label', 'بستن'); dismiss.textContent = '×';
+    apply.textContent = candidate.wordCount > 1 ? strings.fixPhrase : strings.fix;
+    const dismiss = document.createElement('button'); dismiss.className = 'kf-dismiss'; dismiss.type = 'button'; dismiss.setAttribute('aria-label', strings.dismiss); dismiss.textContent = '×';
     apply.addEventListener('mousedown', e => e.preventDefault());
     dismiss.addEventListener('mousedown', e => e.preventDefault());
     apply.addEventListener('click', () => applyCandidate(candidate));

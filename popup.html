@@ -10,32 +10,34 @@
   <main class="app">
     <header class="top">
       <img class="brand-icon" src="icons/icon48.png" alt="" width="45" height="45">
-      <div class="brand"><h1>KeyFix <b>AI</b></h1><p>دستیار هوشمند تایپ</p></div>
-      <span class="status"><i></i> فعال</span>
+      <div class="brand"><h1>KeyFix <b>AI</b></h1><p id="brandSubtitle">دستیار هوشمند تایپ</p></div>
+      <button id="languageToggle" class="language-toggle" type="button" aria-label="Switch interface language to English" title="Switch interface language to English">English</button>
+      <span class="status"><i></i><span id="activeText">فعال</span></span>
     </header>
     <section class="hero">
       <div class="spark">✦</div>
-      <h2>زبان اشتباه؟ درستش کن.</h2>
-      <p>متنت رو وارد کن یا در هر صفحه وب، عبارت را اصلاح کن.</p>
+      <h2 id="heroTitle">زبان اشتباه؟ درستش کن.</h2>
+      <p id="heroDescription">متنت رو وارد کن یا در هر صفحه وب، عبارت را اصلاح کن.</p>
     </section>
-    <label for="source">متنی که اشتباهی تایپ شده</label>
+    <label id="sourceLabel" for="source">متنی که اشتباهی تایپ شده</label>
     <textarea id="source" placeholder="مثلاً sghl o,fd?" spellcheck="false"></textarea>
-    <div class="actions"><button id="convert" class="primary">✦ تبدیل متن</button><button id="swap" class="secondary" title="تبدیل در جهت برعکس">⇄</button></div>
-    <label for="result">نتیجه</label>
+    <div class="actions"><button id="convert" class="primary">✦ <span id="convertText">تبدیل متن</span></button><button id="swap" class="secondary" title="تبدیل در جهت برعکس" aria-label="تبدیل در جهت برعکس">⇄</button></div>
+    <label id="resultLabel" for="result">نتیجه</label>
     <div class="result-wrap"><textarea id="result" readonly placeholder="نتیجه اینجا نمایش داده می‌شود"></textarea><button id="copy" class="copy" title="کپی نتیجه">کپی</button></div>
     <div id="notice" class="notice" aria-live="polite"></div>
     <section class="settings">
-      <div class="setting-copy"><strong>پیشنهاد هنگام تایپ</strong><small>در همان صفحه، پیشنهاد اصلاح را کنار فیلد نشان بده.</small></div>
-      <label class="switch"><input type="checkbox" id="suggestions" checked><span></span></label>
+      <div class="setting-copy"><strong id="suggestionsTitle">پیشنهاد هنگام تایپ</strong><small id="suggestionsDescription">در همان صفحه، پیشنهاد اصلاح را کنار فیلد نشان بده.</small></div>
+      <label class="switch"><input type="checkbox" id="suggestions" aria-labelledby="suggestionsTitle" checked><span></span></label>
     </section>
     <section class="settings settings-last">
-      <div class="setting-copy"><strong>تشخیص دقیق‌تر</strong><small>پیشنهاد خودکار برای عبارت‌های آشنای فارسی و انگلیسی؛ مزاحمت کمتر.</small></div>
-      <label class="switch"><input type="checkbox" id="smartMode" checked><span></span></label>
+      <div class="setting-copy"><strong id="smartModeTitle">تشخیص دقیق‌تر</strong><small id="smartModeDescription">پیشنهاد خودکار برای عبارت‌های آشنای فارسی و انگلیسی؛ مزاحمت کمتر.</small></div>
+      <label class="switch"><input type="checkbox" id="smartMode" aria-labelledby="smartModeTitle" checked><span></span></label>
     </section>
-    <footer><span>🔒 پردازش متن به‌صورت محلی</span><span class="shortcut">Alt + Shift + F</span></footer>
-    <div class="footnote">برای فعال‌شدن در تب‌های باز، صفحه را یک‌بار تازه‌سازی کن.</div>
+    <footer><span id="privacyText">🔒 پردازش متن به‌صورت محلی</span><span id="shortcut" class="shortcut">Alt + Shift + F</span></footer>
+    <div id="refreshHint" class="footnote">برای فعال‌شدن در تب‌های باز، صفحه را یک‌بار تازه‌سازی کن.</div>
   </main>
   <script src="keyboard.js"></script>
+  <script src="language.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

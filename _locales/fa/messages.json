@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "KeyFix AI — اصلاح هوشمند زبان تایپ"
+  },
+  "extensionDescription": {
+    "message": "تشخیص و اصلاح محلی عبارت‌های فارسی و انگلیسی تایپ‌شده با چیدمان اشتباه کیبورد."
+  },
+  "convertSelectionCommand": {
+    "message": "تبدیل متن انتخاب‌شده یا عبارت زیر مکان‌نما"
+  }
+}

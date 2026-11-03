@@ -23,8 +23,9 @@ test('manifest points to existing extension files', () => {
 test('keyboard helper loads before the content script', () => {
   for (const script of manifest.content_scripts) {
     assert.ok(
-      script.js.indexOf('keyboard.js') < script.js.indexOf('content.js'),
-      'keyboard.js must load before content.js'
+      script.js.indexOf('keyboard.js') < script.js.indexOf('language.js') &&
+        script.js.indexOf('language.js') < script.js.indexOf('content.js'),
+      'keyboard.js and language.js must load before content.js'
     );
   }
 });
@@ -32,4 +33,16 @@ test('keyboard helper loads before the content script', () => {
 test('manifest and package versions match', () => {
   const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
   assert.equal(manifest.version, packageJson.version);
+});
+
+test('default locale and localized manifest messages are valid', () => {
+  assert.equal(manifest.default_locale, 'en');
+  for (const language of ['en', 'fa']) {
+    const messages = JSON.parse(
+      fs.readFileSync(path.join(root, '_locales', language, 'messages.json'), 'utf8')
+    );
+    for (const key of ['extensionName', 'extensionDescription', 'convertSelectionCommand']) {
+      assert.equal(typeof messages[key]?.message, 'string', `Missing ${language}.${key}`);
+    }
+  }
 });
