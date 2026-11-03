@@ -282,7 +282,7 @@ button:active {
   position: absolute;
   width: 14px;
   height: 14px;
-  inset-inline-end: 3px;
+  inset-inline-start: 3px;
   top: 3px;
   border-radius: 50%;
   background: white;
