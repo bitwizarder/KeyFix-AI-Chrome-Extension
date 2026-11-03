@@ -1,0 +1,16 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local editor settings
+.vscode/
+
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Generated archives and packages
+*.zip
+*.crx
+dist/
